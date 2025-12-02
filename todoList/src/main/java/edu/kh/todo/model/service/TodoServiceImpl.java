@@ -65,22 +65,42 @@ public class TodoServiceImpl implements TodoService{
 		
 		return mapper.addTodo(todo);
 	}
-
+	
 	@Override
 	public Todo todoDetail(int todoNo) {
-		
 		return mapper.todoDetail(todoNo);
 	}
-
+	
+	@Override
+	public int changeComplete(Todo todo) {
+		return mapper.changeComplete(todo);
+	}
+	
+	@Override
+	public int todoUpdate(Todo todo) {
+		return mapper.todoUpdate(todo);
+	}
+	
 	@Override
 	public int todoDelete(int todoNo) {
-		
 		return mapper.todoDelete(todoNo);
-		
-		 
 	}
-
-
+	
+	@Override
+	public int getTotalCount() {
+		return mapper.getTotalCount();
+	}
+	
+	@Override
+	public int getCompleteCount() {
+		return mapper.getCompleteCount();
+	}
+	
+	@Override
+	public List<Todo> selectList() {
+		return mapper.selectAll();
+	}
+	
 	
 	
 }
