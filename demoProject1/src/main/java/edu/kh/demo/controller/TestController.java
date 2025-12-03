@@ -1,4 +1,4 @@
-package edu.kh.demo.controller;
+ package edu.kh.demo.controller;
 
 import edu.kh.demo.DemoProject1Application;
 import org.springframework.stereotype.Controller;
@@ -40,12 +40,14 @@ public class TestController {
 	// /test/select 요청을 methodC가 처리하겠다
 	*/
 	
+	// @RequestMapping("요청주소")
 	// 2) 메서드에 작성 : 
 	// - 요청 주소와 해당 메서드를 매핑
 	// - GET/POST 가리지 않고 매핑
 	// (속성을 통해서 지정 가능 or 다른 어노테이션 이용)
 	
-	//@RequestMapping(value="/test", method=RequestMethod.GET)
+	//@RequestMapping(value="/test", method=RequestMethod.GET) 
+	//(test로 오는 요청 중에 Get방식만 잡아서 처리하겠다)
 	@RequestMapping("/test") // /test 요청 시 testMethod가 매핑하여 처리함
 	public String testMethod() {
 		System.out.println("/test 요청 받음");

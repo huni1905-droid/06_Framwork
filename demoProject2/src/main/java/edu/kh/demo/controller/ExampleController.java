@@ -37,7 +37,7 @@ public class ExampleController {
 	public String ex1(HttpServletRequest req,  Model model) {
 		
 		req.setAttribute("test1", "HttpServletRequest로 전달한 값"); // request scope
-		model.addAttribute("test2"); // request scope
+		model.addAttribute("test2", "Model로 전달한 값"); // request scope
 		
 		// 단일 값(숫자, 문자열) Model을 이용해서 html로 전달(forward)
 		model.addAttribute("productName", "마이크");
