@@ -74,14 +74,14 @@
 
               <a href="#">
                 <!-- 프로필 이미지 -->
-                 <!-- 
+                <!-- 
                 messages.properties 에 작성된 기본 사용자 이미지 사용
                 -> session.loginMember.profileImg에 유저가 등록한 
                   이미지 경로가 있다면 (== null 이 아니라며)
                   session.loginMember.profileImg에 저장된 경로를 사용하겠다
                 -> 없다면 (== null 이라면)
                   /images/user.png(messages.properties에 user.default.image등록) 사용
-                 -->
+                -->
                 <img th:with="user=#{user.default.image}"
                 th:src="${session.loginMember.profileImg ?: user}"
 
@@ -94,7 +94,7 @@
                 
                 <div>
                   <a href="#" id="nickname" th:text="*{memberNickname}">닉네임</a>
-                  <a href="#" id="logoutBtn">로그아웃</a>
+                  <a href="/member/logout" id="logoutBtn">로그아웃</a>
                 </div>
 
                 <p th:text="*{memberEmail}">이메일</p>
@@ -113,5 +113,6 @@
   <th:block th:replace="~{common/footer}"></th:block>
   
   <!-- script 추가-->
+  <script src="/js/main.js"></script>
 </body>
 </html>
