@@ -14,12 +14,11 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("email")
-@RequiredArgsConstructor // final 필드에 자동으로 의존성 주입
+@RequiredArgsConstructor // final 필드에 자동으로 의존성 주입 
 public class EmailController {
 	
-	@Autowired
 	private final EmailService service;
-	
+
 	@ResponseBody
 	@PostMapping("signup")
 	public int signup(@RequestBody String email) {
@@ -27,7 +26,7 @@ public class EmailController {
 		String authKey = service.sendEmail("signup", email);
 		
 		if(authKey != null) { // 인증번호가 반환되어 돌아옴 
-							  // == 이메일 보내기 성공
+							  //  == 이메일 보내기 성공
 			return 1;
 		}
 		
@@ -36,16 +35,20 @@ public class EmailController {
 		
 	}
 	
-	/** 입력받은 이메일, 인증번혼가 DB에 있는지 조회
+	/** 입력받은 이메일, 인증번호가 DB에 있는지 조회
 	 * @param map : email, authKey
 	 * @return
 	 */
 	@ResponseBody
 	@PostMapping("checkAuthKey")
-	public int checkAuthKey(@RequestBody Map<String, String> map) {		
-		return service.checkAuthKey(map);		
-
+	public int checkAuthKey(@RequestBody Map<String, String> map) {
+		return service.checkAuthKey(map);
 	}
+	
+	
+	
+	
+	
 	
 	
 }

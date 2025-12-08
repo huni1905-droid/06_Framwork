@@ -6,14 +6,14 @@ import edu.kh.project.member.model.dto.Member;
 
 @Mapper
 public interface MemberMapper {
-	
+
 	/** 로그인 SQL 실행
 	 * @param memberEmail
-	 * @return
+	 * @return loginMember
 	 */
-	Member login(String memberEmail);
+	Member login(String memberEmail) throws Exception;
 
-	/** 이메일 중복 검사 SQl 실행
+	/** 이메일 중복 검사 SQL 실행
 	 * @param memberEmail
 	 * @return count
 	 */
@@ -24,5 +24,10 @@ public interface MemberMapper {
 	 * @return
 	 */
 	int checkNickname(String memberNickname);
-}
 
+	
+	
+	
+	
+	
+}

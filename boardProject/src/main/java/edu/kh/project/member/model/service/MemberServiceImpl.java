@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemberServiceImpl implements MemberService {
 	
-	// 등록된 Bean 중에서 같은 타입 or 상속관계인 Bean 
-	@Autowired  // 의존성 주입(DI)
+	// 등록된 Bean 중에서 같은 타입 or 상속관계인 Bean을 의존성 주입(DI)
+	@Autowired
 	private MemberMapper mapper;
 	
 	// Bcrypt 암호화 객체 의존성 주입(SecurityConfig 참고)
@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 		//    암호화된 비밀번호(loginMember.getMemberPw())
 		//    두 비밀번호가 일치하는지 확인
 		
-		// bcrypt.matches(평문, 암호화) : 평문과 암호화가 내부적으로
+		// bcrypt.matches(평문, 암호화된 문자) : 평문과 암호화가 내부적으로
 		//					일치한다고 판단이 되면 true , 아니면 false
 		
 		// 일치하지 않으면
@@ -56,19 +56,15 @@ public class MemberServiceImpl implements MemberService {
 		return loginMember;
 	}
 	
-	
 	// 이메일 중복 검사 서비스
 	@Override
 	public int checkEmail(String memberEmail) {
-
 		return mapper.checkEmail(memberEmail);
 	}
-	
 	
 	// 닉네임 중복 검사 서비스
 	@Override
 	public int checkNickname(String memberNickname) {
-
 		return mapper.checkNickname(memberNickname);
 	}
 	

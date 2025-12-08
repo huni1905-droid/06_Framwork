@@ -67,7 +67,7 @@ public class MemberController {
 				model.addAttribute("loginMember", loginMember);
 				// 1단계 : request scope에 세팅됨
 				// 2단계 : 클래스 위에 @SessionAttributes() 
-				// 어노테이션 작성하여 session scope 이동
+				// 			어노테이션 작성하여 session scope 이동
 				
 				// **************** Cookie *********************
 				// 이메일 저장
@@ -119,6 +119,7 @@ public class MemberController {
 		
 	}
 	
+	
 	/** 회원 가입 페이지로 이동
 	 * @return
 	 */
@@ -128,21 +129,20 @@ public class MemberController {
 	}
 	
 	
-	/**	이메일 중복검사 (비동기 요청)
+	/** 이메일 중복검사 (비동기 요청)
 	 * @return
 	 */
 	@ResponseBody // 응답 본문으로 응답값을 돌려보냄
-	@GetMapping("checkEmail") // GET 방식 /membert/checkEmail 요청
-	public int checkEmail(@RequestParam("memberEmail") String memberEmail) { 
-		
+	@GetMapping("checkEmail")  // GET 방식 /member/checkEmail 요청 매핑
+	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
 		return service.checkEmail(memberEmail);
 	}
-
-	/** 닉네임 중복 검사
+	
+	/** 닉네임 중복 검사 
 	 * @param memberNickname
 	 * @return 중복 1, 아님 0
 	 */
-	@ResponseBody
+	@ResponseBody 
 	@GetMapping("checkNickname")
 	public int checkNickname(@RequestParam("memberNickname") String memberNickname) {
 		return service.checkNickname(memberNickname);
@@ -153,5 +153,5 @@ public class MemberController {
 	
 	
 	
-	
+
 }

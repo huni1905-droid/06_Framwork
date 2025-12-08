@@ -17,7 +17,7 @@ public interface EmailMapper {
 	 * @param map (email, authKey)
 	 * @return int 행의 갯수
 	 */
-	int insertAuthkey(Map<String, String> map);
+	int insertAuthKey(Map<String, String> map);
 
 	/** 입력받은 이메일, 인증번호가 있는지 조회
 	 * @param map
