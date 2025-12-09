@@ -37,7 +37,21 @@
    		AND MEMBER_NICKNAME = #{memberNickname}
    </select>
    
-   
+  <!-- 회원 가입 -->
+  <!-- DML의 경우 무조건 resultType="_int"이기 때문에 안 써도 된다-->
+  <insert id="signup">
+  		INSERT INTO "MEMBER"
+		VALUES(SEQ_MEMBER_NO.NEXTVAL, 
+			 #{memberEmail},
+			 #{memberPw},
+			 #{memberNickname},
+			 #{memberTel},
+			 #{memberAddress},
+			 NULL,
+			 DEFAULT,
+			 DEFAULT,
+			 DEFAULT)  
+  </insert>
    
    
   
