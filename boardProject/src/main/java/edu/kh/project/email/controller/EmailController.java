@@ -14,7 +14,8 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("email")
-@RequiredArgsConstructor // final 필드에 자동으로 의존성 주입 
+@RequiredArgsConstructor // final이 붙은 필드에 자동으로 의존성 주입
+						 // (@Autowired 해주는 효과) 
 public class EmailController {
 	
 	private final EmailService service;

@@ -99,9 +99,11 @@ public class EmailServiceImpl implements EmailService {
 	public boolean storeAuthKey(Map<String, String> map) {
 		
 		// 1. 기존 이메일에 대한 인증키 update 수행
+		// 		기존에 저장된 이메일이 있다면 인증키 정상 update 
 		int result = mapper.updateAuthKey(map);
 		
 		// 2. update 실패 시 insert 수행
+		//		기존에 저장된 이메일이 없다면 인증키 정상 update 불가 -> insert 수행 
 		if(result == 0) {
 			result = mapper.insertAuthKey(map);
 		}

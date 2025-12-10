@@ -124,7 +124,7 @@ public class ParameterController {
 		return "redirect:/param/main";
 	}
 	
-	// @ModelAttribute 를 이용한 파라미터 얻어오기
+	// 4. @ModelAttribute 를 이용한 파라미터 얻어오기
 	// @ModelAttribute 자료형 변수
 	// - DTO (또는 VO)와 같이 사용하는 어노테이션
 	

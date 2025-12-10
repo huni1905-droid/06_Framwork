@@ -50,6 +50,8 @@ public class MemberController {
 						RedirectAttributes ra,
 						Model model, 
 						@RequestParam(value="saveId", required = false) String saveId,
+						// required = false 안 해주면 기본 값이 true라서 
+						// 	saveId에 체크 안되서 넘어오면 오류 발생
 						HttpServletResponse resp) {
 		
 		// 로그인 서비스 호출
