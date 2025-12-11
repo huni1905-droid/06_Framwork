@@ -1,18 +1,28 @@
 package edu.kh.project.common.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.unit.DataSize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.project.member.model.dto.Member;
 import jakarta.servlet.MultipartConfigElement;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Configuration // 서바가 실행되자마자 Bean 으로 등록되서 아래 실행되는 설정용 클래스다
 @PropertySource("classpath:/config.properties")
 public class FileConfig implements WebMvcConfigurer{
@@ -40,6 +50,17 @@ public class FileConfig implements WebMvcConfigurer{
 	@Value("${spring.servlet.multipart.max-file-size}")
 	private long maxFileSize; // 10485760
 
+	// --------------------------------------------------
+	
+	// 프로필 이미지 관련 경로
+	@Value("${my.profile.resource-handler}")
+	private String profileResourceHandler;
+	//  /myPage/profile/**
+	
+	@Value("${my.profile.resource-location}")
+	private String profileResourceLocation;
+	//  file:///C:/uploadFiles/profile/
+	
 	
 	// 요청 주소에 따라
 	// 서버 컴퓨터의 어떤 경로에 접근할지 설정
@@ -57,10 +78,16 @@ public class FileConfig implements WebMvcConfigurer{
 		// 서버 폴더 경로 중 C:/uploadFiles/test/ 로 연결 하겠다.
 		
 		
-		
+		registry.addResourceHandler(profileResourceHandler)
+		.addResourceLocations(profileResourceLocation);
+		// -> 클라이언트가 /myPage/profile/** 패턴으로 이미지 요청할 때
+		// 서버 폴더 경로 중 C:/uploadFiles/profile/로 연결
 		
 		
 	}
+	
+	
+	
 	
 	// MultipartResolver 설정
 	@Bean
@@ -102,7 +129,18 @@ public class FileConfig implements WebMvcConfigurer{
 	}
 	
 	
-	
+	@PostMapping("file/test3")	//  /myPage/file/test3 POST 요청 매핑
+	public String fileUpload3(@RequestParam("aaa") List<MultipartFile> aaaList,
+			@RequestParam("bbb") List<MultipartFile> bbbList,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra) {
+		
+		log.debug("aaaList" + aaaList);		// [요소, 요소]
+		log.debug("bbbList" + bbbList);  	// [요소]
+
+		
+		return "redirect:/myPage/fileTest";
+	}
 	
 	
 }
