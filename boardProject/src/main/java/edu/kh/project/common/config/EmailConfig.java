@@ -9,8 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-@Configuration
-@PropertySource("classpath:/config.properties")
+@Configuration // 서버가 시작되자마자 클래스가 Bean으로 등록되고, 내부가 수행된다
+@PropertySource("classpath:/config.properties") // config.properties 읽어들이는 어노테이션
 public class EmailConfig {
 	
 	/*
