@@ -8,24 +8,25 @@ import org.springframework.context.annotation.Configuration;
 
 import edu.kh.project.common.filter.LoginFilter;
 
-@Configuration // 서버가 켜질 때 Bean으로 등록되고, 해당 클래스 내 모든 메서드 실행됨
-public class FilterConfig {
 
+@Configuration // 서버가 켜질 때 해당 클래스 내 모든 메서드 실행됨
+public class FilterConfig {
+	
 	// 만들어 놓은 LoginFilter 클래스가 언제 적용될지 설정
 	
 	@Bean // 반환된 객체를 Bean으로 등록 : 
 		// LoginFilter로 타입을 제한한 객체를 Bean으로 등록
-	public FilterRegistrationBean<LoginFilter> loginFilter(){
+	public FilterRegistrationBean<LoginFilter> loginFilter() {
 		// FilterRegistrationBean : 필터를 Bean으로 등록하는 객체
 		
 		FilterRegistrationBean<LoginFilter> filter 
-			= new FilterRegistrationBean<>();
+			= new FilterRegistrationBean<>(); 
 		
 		// 사용할 필터 객체 세팅
 		filter.setFilter(new LoginFilter());
 		
 		// 필터가 동작할 URL 을 세팅
-		//  /myPage/*   : /myPage로 시작하는 모든 요청을 로그인필터 거치게 하겠다
+		// /myPage/*   : /myPage로 시작하는 모든 요청
 		String[] filteringURL = {"/myPage/*", "/chatting/*", "/editBoard/*"};
 		
 		// String[]을 List로 변환
@@ -38,7 +39,7 @@ public class FilterConfig {
 		// 필터 순서 지정
 		filter.setOrder(1);
 		
-		return filter; // 반환된 객체가 Bean으로 등록 
+		return filter; // 반환된 객체가 Bean 등록
 		
 	}
 	
