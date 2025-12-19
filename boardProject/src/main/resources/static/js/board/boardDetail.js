@@ -75,7 +75,7 @@ if(updateBtn != null) { // 수정 버튼 존재 시
         // 목표 : /editBoard/1/2001/update?cp=1
         location.href = location.pathname.replace('board', 'editBoard')
                         + "/update"
-                        + location.search;
+                        + location.search;// 쿼리스트링만 반환
     });
 
 }
