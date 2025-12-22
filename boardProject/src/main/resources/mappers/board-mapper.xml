@@ -262,29 +262,41 @@
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 
-	<!-- 좋아요 해제 SQL(DELETE) -->
+	<!-- 좋아요 해제 SQL(DELETE)  -->
 	<delete id="deleteBoardLike">
 		DELETE FROM "BOARD_LIKE"
 		WHERE MEMBER_NO = #{memberNo}
 		AND BOARD_NO = #{boardNo}
 	</delete>
-	
+
 	<!-- 좋아요 체크 SQL(INSERT) -->
 	<insert id="insertBoardLike">
-		INSERT INTO "BOARD_LIKE"
+		INSERT INTO "BOARD_LIKE" 
 		VALUES(#{memberNo}, #{boardNo})
 	</insert>
-	
+
 	<!-- 게시글 좋아요 갯수 조회(SELECT) -->
 	<select id="selectLikeCount">
 		SELECT COUNT(*) FROM "BOARD_LIKE"
 		WHERE BOARD_NO = #{boardNo}
 	</select>
-
-
-
-
-
+	
+	
+	<!-- DB 이미지 파일명 목록 조회 -->
+	<select id="selectDbImageList">
+		SELECT SUBSTR(PROFILE_IMG, 
+		INSTR(PROFILE_IMG, '/', -1) + 1) "rename"
+		FROM "MEMBER"
+		UNION
+		SELECT CAST(IMG_RENAME AS VARCHAR2(300)) "rename"
+		FROM "BOARD_IMG"
+	</select>
+	
+	
+	
+	
+	
+	
 
 
 </mapper>
