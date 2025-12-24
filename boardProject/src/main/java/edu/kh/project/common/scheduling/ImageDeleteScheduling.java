@@ -32,7 +32,6 @@ public class ImageDeleteScheduling {
 	//@Scheduled(cron = "0 0 0 * * *") // 자정
 	//@Scheduled(cron = "0 0 12 * * *") // 정오
 	//@Scheduled(cron = "0 0 0 1 * *") // 매달 1일
-	
 	@Scheduled(cron = "0 0 0 1 * *")
 	public void scheduling() {
 		log.info("스케줄러 동작!");
