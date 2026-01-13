@@ -35,22 +35,25 @@ COMMENT ON COLUMN "MEMBER"."AUTHORITY" IS '권한(1:일반, 2:관리자)';
 -- 회원 번호 시퀀스 만들기
 CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
 
+SELECT * FROM MEMBER;
+
 
 -- 샘플 회원 데이터 삽입
 INSERT INTO "MEMBER"
-VALUES(SEQ_MEMBER_NO.NEXTVAL, 
-			 'user01@kh.or.kr',
-			 'pass01!',
-			 '유저일',
+VALUES(SEQ_MEMBER_NO.NEXTVAL,
+			 'admin1@kh.or.kr','$2a$10$SC0KYLzAdtkZT12h5wTWT.csuiG.boiRC4ct6Mioe5puIo4W7GZmW',
+			 '관리자1',
 			 '01012341234',
-			 NULL,
+			 '01234^^^서울시 중구 남대문로 120^^^3층, E강의장',
 			 NULL,
 			 DEFAULT,
 			 DEFAULT,
-			 DEFAULT
+			 2
 );
-
 COMMIT;
+
+
+
 
 SELECT * FROM "MEMBER";
 
