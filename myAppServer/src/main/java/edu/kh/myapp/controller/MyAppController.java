@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 // -> 클라이언트와 서버의 출처가 다를 때는 CORS 설정을 적절히 해주어야
 //    정상적인 http 통신을 할 수 있다.
 
-@CrossOrigin(origins = "http://localhost:5173") // http://localhost:5173와 자원을 공유하는 사이다.
-@RestController
+@CrossOrigin(origins = "http://localhost:5173") // http://localhost:5173와 자원(데이터)을 공유하는 사이다.라고 브라우저에 알려주는것
+@RestController // 비동기 교청을 받아주는 어노테이션(@Controller + @RespondBody)
 public class MyAppController {
 	
 	@GetMapping("getPortNumber")
 	public List<String> getPortNumber() {
 		return Arrays.asList("서버 포트는 80번", 
-						"클라이언트 포트는 5173번");
+						"클라이언트 포트는 5173번");// asList : 문자열을 List 형식으로 변환
 	}
 	
 	
