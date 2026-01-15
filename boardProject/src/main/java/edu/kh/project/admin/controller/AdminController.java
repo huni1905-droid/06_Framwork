@@ -2,18 +2,21 @@ package edu.kh.project.admin.controller;
 
 import java.util.List;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.kh.project.admin.model.service.AdminService;
+import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.member.model.dto.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +47,7 @@ public class AdminController {
 		// ResponseEntity 
 		// Spring에서 제공하는 Http 응답 데이터를
 		// 커스터마이징 할 수 있도록 지원하는 클래스
-		// -> Http 상태코드, 헤더, 응답 본문(body)을 모두 설정 가능
+		// -> Http 상태코드, 헤더, 응답 본문(body)을 모두 설정 가능(보낼수 있음)
 		try {
 			session.invalidate(); // 세션 무효화 처리
 			return ResponseEntity.status(HttpStatus.OK) // 200
@@ -99,6 +102,84 @@ public class AdminController {
 		}catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(null);
+		}
+	}
+	
+	
+	/** 최대 조회수 게시글 조회
+	 * @return
+	 */
+	@GetMapping("maxReadCount")
+	public ResponseEntity<Object> maxReadCount() {
+		try {
+			Board board = service.maxReadCount();
+			return ResponseEntity.status(HttpStatus.OK).body(board);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(null);
+		}
+	}
+	
+	
+	/** 최대 좋아요수 게시글 조회
+	 * @return
+	 */
+	@GetMapping("maxLikeCount")
+	public ResponseEntity<Object> maxLikeCount() {
+		try {
+			Board board = service.maxLikeCount();
+			return ResponseEntity.status(HttpStatus.OK).body(board);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(null);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/** 탈퇴 회원 리스트 조회
+	 * @return
+	 */
+	@GetMapping("withdrawnMemberList")
+	public ResponseEntity<Object> selectWithdrawnMemberList() {
+		// 성공 시 List<Member> 반환, 에러 발생했을 때 String 반환
+		// -> ResponseEntity<Object>와 같이 Object로 받아줘야 한다 
+		try {
+			List<Member> withdrawnMemberList = service.selectWithdrawnMemberList();
+			return ResponseEntity.status(HttpStatus.OK).body(withdrawnMemberList);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("탈퇴한 회원 목록 조회 중 문제 발생 : " + e.getMessage());
+		}
+	}
+	
+	
+	@PutMapping("restoreMember")
+	public ResponseEntity<String> restoreMember(@RequestBody Member member) {
+		try {
+			int result = service.restoreMember(member.getMemberNo());
+			
+			if(result > 0) {
+				return ResponseEntity.status(HttpStatus.OK)
+						.body(member.getMemberNo() + "번 회원 복구 완료");
+			} else {
+				// BAD_REQUEST : 400 (잘못된 요청 - 요청 구문이 잘못되었거나 유효하지 않음)
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("유효하지 않은 memberNo : " + member.getMemberNo());
+			}
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("탈퇴 회원 복구 중 문제 발생 : " + e.getMessage());
 		}
 	}
 	
