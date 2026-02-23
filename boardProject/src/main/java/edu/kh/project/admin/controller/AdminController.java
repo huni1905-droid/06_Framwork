@@ -2,7 +2,6 @@ package edu.kh.project.admin.controller;
 
 import java.util.List;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -47,7 +46,7 @@ public class AdminController {
 		// ResponseEntity 
 		// Spring에서 제공하는 Http 응답 데이터를
 		// 커스터마이징 할 수 있도록 지원하는 클래스
-		// -> Http 상태코드, 헤더, 응답 본문(body)을 모두 설정 가능(보낼수 있음)
+		// -> Http 상태코드, 헤더, 응답 본문(body)을 모두 설정 가능
 		try {
 			session.invalidate(); // 세션 무효화 처리
 			return ResponseEntity.status(HttpStatus.OK) // 200
@@ -121,37 +120,12 @@ public class AdminController {
 		}
 	}
 	
-	
-	/** 최대 좋아요수 게시글 조회
-	 * @return
-	 */
-	@GetMapping("maxLikeCount")
-	public ResponseEntity<Object> maxLikeCount() {
-		try {
-			Board board = service.maxLikeCount();
-			return ResponseEntity.status(HttpStatus.OK).body(board);
-			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(null);
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	/** 탈퇴 회원 리스트 조회
 	 * @return
 	 */
 	@GetMapping("withdrawnMemberList")
 	public ResponseEntity<Object> selectWithdrawnMemberList() {
-		// 성공 시 List<Member> 반환, 에러 발생했을 때 String 반환
-		// -> ResponseEntity<Object>와 같이 Object로 받아줘야 한다 
+		// 성공 시 List<Member> 반환, 에러 발생했을 때 String -> Object
 		try {
 			List<Member> withdrawnMemberList = service.selectWithdrawnMemberList();
 			return ResponseEntity.status(HttpStatus.OK).body(withdrawnMemberList);

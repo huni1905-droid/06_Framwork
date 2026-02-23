@@ -92,6 +92,8 @@ public class EmailServiceImpl implements EmailService {
 		
 		return templateEngine.process("email/" + type, context);
 		// src/main/resources/templates/email/signup.html
+		// Html내용을 메일으로 보내려면 위 경로상에 있는 코드들이 Java 코드로 변경되야되 
+		// templateEngine.process : 위 경로상의 코드를 자바코드로 바꾸는것 
 	}
 
 	// 인증키와 이메일을 DB에 저장하는 메서드
@@ -121,6 +123,7 @@ public class EmailServiceImpl implements EmailService {
 	// 주로 데이터베이스 기본키, 고유한 식별자를 생성해야 할 때 사용
 	private String createAuthKey() {
 		return UUID.randomUUID().toString().substring(0, 6);
+		// 6자리의 난수 인증번호를 반환
 	}
 	
 	
