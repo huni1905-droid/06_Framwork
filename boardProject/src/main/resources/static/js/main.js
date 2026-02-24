@@ -9,8 +9,10 @@ const getCookie = (key) => {
 	//console.log(cookies); // saveId=user01@kh.or.kr; testKey=testValue
 
 	// cookies 문자열을 배열 형태로 변환
-	const cookieList = cookies.split("; ") // ["K=V", "K=V"...]
-		.map(el => el.split("="));  // ["K", "V"]..
+	const cookieList = cookies.split("; ") // ';'를 기준으로 잘라내어 배열 형태로 반환한다. 
+																				 // ["K=V", "K=V"...]
+		.map(el => el.split("="));  // 위의 K=V를 하나씩 접근해서 el로 받아와 = 기준으로 쪼갠다. 
+																// ["K", "V"]..
 
 	//console.log(cookieList); 
 
