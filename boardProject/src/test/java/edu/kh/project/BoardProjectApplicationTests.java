@@ -1,7 +1,6 @@
 package edu.kh.project;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
 class BoardProjectApplicationTests {
-
 	// ApplicationContext : Spring 컨테이너라고 불리며, 애플리케이션에 필요한 Bean, DI 등 처리를 관리하는 인터페이스
+
 	@Autowired
 	private ApplicationContext applicationContext;
 	
